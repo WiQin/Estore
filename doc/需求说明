@@ -1,0 +1,67 @@
+一	功能需求说明
+1.1.1	ESTORE部分功能分析
+1.1.1.1	注册
+ 	在register.jsp页面注册一个新用户，用户名作为以后登陆唯一标识。当注册成功的话，跳转到login.jsp页面
+详细描述：1．需要判断注册的用户名是否已经在数据库中存在。
+		  2．最后将注册信息保存到Customer表
+具体步骤：1. 实现CustomerDao接口中的insertCustomer()方法
+		  2．实现CustomerService接口中的业务逻辑saveCustomer()方法
+		  4．创建RegisterServlet.java，在该Servlet中调用CustomerService接口中的saveCustomer()方法进行注册。
+1.1.1.2	登陆
+在login.jsp页面上用户可以输入用户名和密码进行登陆，如果用户名和密码都正确，则登陆成功跳转到index.jsp。如果不正确，需要提示用户并且还是跳转到login.jsp页面继续登陆。
+具体登陆过程：
+1．	查看登陆的用户名是否存在
+2．	查看密码是否正确
+
+具体步骤：1. 实现CustomerDao接口中的SelectCustomerByName()方法
+		  2．实现CustomerService接口中的业务逻辑findCustomerByName()方法
+		  4．创建LoginServlet，在该Servlet中调用CustomerService接口中的findCustomerByName()方法进行登陆。
+		  5. 从application中取出所有的Book在listBookStore.jsp中显示
+1.1.1.3	购物车
+1．	增加Orderline
+在index.jsp中点击更多精彩后往购物车中增加一个Orderline.
+
+具体步骤： 1) 创建AddShopCarServlet
+		   2) 在该Servlet中根据从index.jsp页面传入的bookid和num来构造一个Orderline对象，然后从Session中获得购物车(ShoppingCart)的对象，并且调用其中的addCar(book,id)方法往购物车中增加一个Orderline对象。
+			3) 增加Orderline成功后跳转到index.jsp页面
+
+2．	查看购物车
+在index.jsp页面上点击查看购物车的按钮可以查看购物车中所有Orderline的信息。
+
+具体步骤：1) 点击查看购物车按钮后链接到shopcar.jsp
+		  2) 在shopcar.jsp页面中，从Session中取出ShoppingCart对象并且在该页面上输出所有其中的Orderline信息。
+3．	修改Orderline
+在shopcart.jsp页面上修改图书数量通过并点击增加减少按钮后可以修改指定一个Orderline的信息。
+
+
+1.1.1.4	、订单
+1．	查看用户所有订单
+在index.jsp页面上点击查看我的订单按钮后可以查看当前登陆用户所有的订单信息。
+具体步骤：1) 实现OrderFormDao接口中的SelectAllOrderByCusId()方法
+		  2) 实现OrderFormService接口中的业务方法findtAllOrderByCusId()
+		  3) 创建MyOrderServlet，在该Servlet中调用OrderFormService接口中的findAllOrderById()方法来查找用户的所有订单信息。
+		  4) 查找订单成功后跳转到Myorderr.jsp页面，并将订单信息在该页面上显示。如果没有则去首页去购物
+
+2．	提交订单
+在shopcar.jsp页面上点击提交订单的按钮后链接到confirm.jsp页面，然后在该页面上点击确认订单按钮后才正式提交订单，将订单信息分别保存到orderform和orderline表中。
+
+具体步骤：1) 先链接到confirm.jsp页面，在该页面上从Session中取出ShoppingCart对象并将它们的信息显示在页面，在该页面显示地址信息，可以新增地址
+		  2) 实现OrderFormDao接口中的insertOrderFrom()方法
+		  3) 实现OrderFormService接口中的业务方法saveOrderForm()
+		  4) 实现shipAddressDao接口中的insertshipAddres()方法
+		  5) 创建toConfirmServlet.java
+		  6) 在该Servlet中从Session中获得从Session中获得ShoppingCart对象并将它包装成一个Orderform(订单)对象(注意要建立起Orderform对象和所有Orderline对象之间的双向关联关系)，此时将调用shipAdressService中的saveshipAddress或者selectAllAdres
+		  7) 提交订单成功后跳转到confirmsus.jsp，在confirmsus.jsp页面上点击继续购买按钮可以跳转到index.jsp。
+
+4.  删除订单
+在MyOrder.jsp页面上点击删除按钮可以删除指定的一个用户订单。
+
+具体步骤：1) 实现OrderFormDao接口中的delOrderFormById()方法
+		  2) 实现OrderFormService接口中的业务方法delOrderFromById()
+		  3) 创建DelOrderServlet.java
+		  4) 在该Servlet中获得从myOrder.jsp传递过来的orderid，然后根据该orderid，调用OrderService接口中的delOrderFormById()方法删除指定的订单。
+		  5) 订单删除成功后跳转到myOrder.jsp
+
+
+
+

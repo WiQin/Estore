@@ -1,0 +1,11 @@
+1.导入静态页面
+2.修改为动态页面
+3.建表
+4.导入jar包  ojdbc  standard  jstl  log4j  dom4j
+5.建立目录结构
+    bean  实体类
+    util    exception   jdbc
+    dao   impl
+    service  impl
+    web     filter      listener      servlet
+6.在bean包下建表语句来创建相应实体类的属性，加上set/get方法，toString方法

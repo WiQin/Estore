@@ -1,0 +1,270 @@
+1.Oracle
+drop table book cascade constraints;
+create table book(
+id number primary key,
+name varchar2(100),
+price number,
+type varchar2(50)
+)
+logging
+nocompress
+nocache
+;
+
+insert into book(id,name,price,type) values('1','JAVA核心技术','81','java');
+insert into book(id,name,price,type) values('2','UNIX技术手册','21.15','unix');
+insert into book(id,name,price,type) values('3','ORACLE9I参考手册','108','数据库');
+insert into book(id,name,price,type) values('4', 'JSP设计(第三版)', '59.25','jsp');
+insert into book(id,name,price,type) values('5', 'JAVA SERVLET 编程(第二版)', '38.25','java');
+insert into book(id,name,price,type) values('6', 'XML 高级编程(第2版)', '97.20','xml');
+insert into book(id,name,price,type) values('7', '精通STRUTS:基于MVC的JAVA WEB设计与开发', '36.75','java');
+insert into book(id,name,price,type) values('8', '精通HIBERNATE：JAVA对象持久化技术详解', '44.25','java');
+insert into book(id,name,price,type) values('9', 'SPRING IN ACTION中文版', '29.25','spring');
+insert into book(id,name,price,type) values('10', '精通EJB 3.0', '44.25','javaee');
+
+drop table customer cascade constraints;
+create table customer(
+id number primary key,
+name varchar2(20) unique,
+password varchar2(20),
+zip varchar2(10),
+address varchar2(30),
+telephone varchar2(11),
+email varchar2(20),
+check(name is not null)
+)
+logging
+nocompress
+nocache
+;
+
+drop table orderform cascade constraints;
+create table orderform(
+id number primary key,
+cost number(8,2),
+orderdate date,
+customerid number,
+sadres_id number,
+foreign key(customerid) references customer(id),
+foreign key(sadres_id) references shipaddres(id)
+)
+logging
+nocompress
+nocache
+;
+
+drop table orderline cascade constraints;
+create table orderline(
+id number primary key,
+num number not null,
+orderid number,
+bookid number,
+check(num is not null),
+foreign key(orderid) references orderform(id),
+foreign key(bookid) references book(id)
+)
+logging
+nocompress
+nocache
+;
+
+drop table shipaddres cascade constraints;
+create table shipaddres(
+id number primary key,
+shipuname varchar2(20),
+adres varchar2(100),
+phone varchar2(11),
+cus_id number,
+foreign key(cus_id) references customer(id)
+)
+logging
+nocompress
+nocache
+;
+
+drop sequence cus_id_seq;
+create sequence cus_id_seq
+	increment by 1
+	minvalue 1
+	maxvalue 999999999999999999999999999
+	start with 41
+	cache 20;
+
+drop sequence emp_id_seq;
+create sequence emp_id_seq
+	increment by 1
+	minvalue 1
+	maxvalue 999999999999999999999999999
+	cache 3;
+
+drop sequence orderform_seq;
+create sequence orderform_seq
+	increment by 1
+	minvalue 1
+	maxvalue 99999999999999999999999999
+	start with 81
+	cache 20;
+
+drop sequence orderline_seq;
+create sequence orderline_seq
+	increment by 1
+	minvalue 1
+	maxvalue 999999999999999999999999999
+	start with 81
+	cache 20;
+
+drop sequence s_customer_id;
+create sequence s_customer_id
+	increment by 1
+	minvalue 1
+	maxvalue 9999999
+	start with 216
+	nocache;
+
+drop sequence s_dept_id;
+create sequence s_dept_id
+	increment by 1
+	minvalue 1
+	maxvalue 9999999
+	start with 51
+	nocache;
+
+drop sequence s_emp_id;
+create sequence s_emp_id
+	increment by 1
+	minvalue 1
+	maxvalue 9999999
+	start with 26
+	nocache;
+
+drop sequence s_image_id;
+create sequence s_image_id
+	increment by 1
+	minvalue 1
+	maxvalue 9999999
+	start with 1981
+	nocache;
+
+drop sequence s_longtext_id;
+create sequence s_longtext_id
+	increment by 1
+	minvalue 1
+	maxvalue 9999999
+	start with 1369
+	nocache;
+
+drop sequence s_ord_id;
+create sequence s_ord_id
+	increment by 1
+	minvalue 1
+	maxvalue 9999999
+	start with 113
+	nocache;
+
+drop sequence s_region_id;
+create sequence s_region_id
+	increment by 1
+	minvalue 1
+	maxvalue 9999999
+	start with 6
+	nocache;
+
+drop sequence s_warehouse_id;
+create sequence s_warehouse_id
+	increment by 1
+	minvalue 1
+	maxvalue 9999999
+	start with 10502
+	nocache;
+
+drop sequence shipadres_seq;
+create sequence shipadres_seq
+	increment by 1
+	minvalue 1
+	maxvalue 999999999999999999999999999
+	start with 81
+	cache 20;
+
+drop sequence stu_id_seq;
+create sequence stu_id_seq
+	increment by 1
+	minvalue 1
+	maxvalue 999999999999999999999999999
+	start with 41
+	cache 20;
+
+drop sequence student_id_seq;
+create sequence student_id_seq
+	increment by 1
+	minvalue 1
+	maxvalue 999999999999999999999999999
+	start with 42
+	cache 20;
+
+--------------------------------------------------------------------------------------------------
+
+2.MySql
+drop table if Exists `book`;
+create table `book`(
+`id` bigint primary key ,
+`name` varchar(100),
+`price` float(10,2),
+`type` varchar(50)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+insert into `book`(id,name,price,type) values('1','JAVA核心技术','81','java');
+insert into `book`(id,name,price,type) values('2','UNIX技术手册','21.15','unix');
+insert into `book`(id,name,price,type) values('3','ORACLE9I参考手册','108','数据库');
+insert into `book`(id,name,price,type) values('4', 'JSP设计(第三版)', '59.25','jsp');
+insert into `book`(id,name,price,type) values('5', 'JAVA SERVLET 编程(第二版)', '38.25','java');
+insert into `book`(id,name,price,type) values('6', 'XML 高级编程(第2版)', '97.20','xml');
+insert into `book`(id,name,price,type) values('7', '精通STRUTS:基于MVC的JAVA WEB设计与开发', '36.75','java');
+insert into `book`(id,name,price,type) values('8', '精通HIBERNATE：JAVA对象持久化技术详解', '44.25','java');
+insert into `book`(id,name,price,type) values('9', 'SPRING IN ACTION中文版', '29.25','spring');
+insert into `book`(id,name,price,type) values('10', '精通EJB 3.0', '44.25','javaee');
+
+drop table if EXISTS `customer`;
+create table `customer`(
+`id` bigint primary key ,
+`name` varchar(20) not null ,
+`password` varchar(20),
+`zip` varchar(10),
+`address` varchar(30),
+`telephone` varchar(11),
+`email` varchar(20)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+drop table if EXISTS `shipaddres` ;
+create table `shipaddres`(
+`id` bigint primary key,
+`shipuname` varchar(20),
+`adres` varchar(100),
+`phone` varchar(11),
+`cus_id` bigint,
+foreign key(`cus_id`) references `customer`(`id`) on delete cascade on update cascade
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+drop table  if EXISTS `orderform` ;
+create table `orderform`(
+`id` bigint  primary key  ,
+`cost` float(8,2),
+`orderdate` datetime,
+`customerid` bigint,
+`sadres_id` bigint,
+foreign key(`customerid`) references `customer`(`id`) on delete cascade on update cascade,
+foreign key(`sadres_id`) references `shipaddres`(`id`) on delete cascade on update cascade
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+drop table if EXISTS `orderline` ;
+create table `orderline`(
+`id` bigint primary key,
+`num` bigint not null,
+`orderid` bigint,
+`bookid` bigint,
+foreign key(`orderid`) references `orderform`(`id`) on delete cascade on update cascade,
+foreign key(`bookid`) references `book`(`id`) on delete cascade on update cascade
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
