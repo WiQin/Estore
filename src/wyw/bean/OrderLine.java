@@ -8,8 +8,8 @@ package wyw.bean;
 public class OrderLine {
     private long id;
     private int num;
-    private OrderForm orderForm;
-    private Book book;
+    private OrderForm orderForm;//n：1
+    private Book book;//n：1
 
     public OrderLine() {
     }

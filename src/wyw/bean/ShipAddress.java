@@ -10,7 +10,7 @@ public class ShipAddress {
     private String shipuname;
     private String adres;
     private String phone;
-    private Customer customer;
+    private Customer customer;//n：1
 
     public ShipAddress() {
     }

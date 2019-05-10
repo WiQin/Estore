@@ -9,3 +9,7 @@
     service  impl
     web     filter      listener      servlet
 6.在bean包下建表语句来创建相应实体类的属性，加上set/get方法，toString方法
+7.util包下新增数据库连接（src下新增property.properties文件，存放数据库连接信息）
+8.dao包下新增接口及实现类  (数据库逻辑)
+9.service  （业务逻辑，比如判断什么情况下可以登陆）
+10.servlet

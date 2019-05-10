@@ -1,5 +1,7 @@
 package wyw.bean;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 /**
@@ -11,8 +13,10 @@ public class OrderForm {
     private long id;
     private double cost;
     private Date orderDate;
-    private Customer customer;
+    private Customer customer;//n：1
     private ShipAddress shipAddress;
+
+    private Collection<OrderLine> lines = new ArrayList<OrderLine>();//1：n
 
     public OrderForm() {
     }

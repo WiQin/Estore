@@ -22,7 +22,7 @@
         </div>
     </div>
     <div class="content2">
-        <form action="index.html" method="post">
+        <form action="RegisterServlet" method="post">
             <ul class="reg_box">
                 <li>
                     <span><b>*</b>用户名：</span>

@@ -17,6 +17,15 @@ public class Customer {
     public Customer() {
     }
 
+    public Customer(String name, String password, String zip, String address, String telephone, String email) {
+        this.name = name;
+        this.password = password;
+        this.zip = zip;
+        this.address = address;
+        this.telephone = telephone;
+        this.email = email;
+    }
+
     public Customer(long id, String name, String password, String zip, String address, String telephone, String email) {
         this.id = id;
         this.name = name;
