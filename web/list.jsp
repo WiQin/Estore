@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%
+    String path = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,7 +23,7 @@
 <div class="top">
     <div class="top_center">
         <ul class="top_bars">
-            <li><a href="index.html">退出</a>|</li>
+            <li><a href="index.jsp">退出</a>|</li>
             <li><a href="#">我的订单<span class="jt_down"></span></a>|</li>
             <li><a href="#">关注杰普<span class="jt_down"></span></a>|</li>
             <li><a href="#">网站导航<span class="jt_down"></span></a></li>
@@ -27,27 +32,27 @@
 </div>
 <!--头部-->
 <div class="header3">
-    <a href="index.html"><img src="images/logo.png"></a>
+    <a href="index.jsp"><img src="images/logo.png"></a>
     <div class="h3_center">
         <div class="search_box">
             <input type="text"/>
             <span>搜索</span>
         </div>
         <p>
-            <a href="list.html">文学类</a>|
-            <a href="list.html">教育类</a>|
-            <a href="list.html">计算机</a>|
-            <a href="list.html">儿童类</a>|
-            <a href="list.html">漫画类</a>|
+            <a href="list.jsp">文学类</a>|
+            <a href="list.jsp">教育类</a>|
+            <a href="list.jsp">计算机</a>|
+            <a href="list.jsp">儿童类</a>|
+            <a href="list.jsp">漫画类</a>|
         </p>
     </div>
     <div class="h3_right">
         <div class="myyy">
-            <a href="userinfo.html">个人信息</a>
+            <a href="userinfo.jsp">个人信息</a>
             <span class="sj_down"></span>
         </div>
         <div class="tsc">
-            <a href="shopCart.html">去购物车结算</a>
+            <a href="shopCart.jsp">去购物车结算</a>
             <span class="sj_right"></span>
         </div>
     </div>
@@ -59,11 +64,11 @@
             全部图书分类
         </div>
         <ul>
-            <li><a href="list.html">文学类</a></li>
-            <li><a href="list.html">教育类</a></li>
-            <li><a href="list.html">计算机</a></li>
-            <li><a href="list.html">儿童类</a></li>
-            <li><a href="list.html">漫画类</a></li>
+            <li><a href="list.jsp">文学类</a></li>
+            <li><a href="list.jsp">教育类</a></li>
+            <li><a href="list.jsp">计算机</a></li>
+            <li><a href="list.jsp">儿童类</a></li>
+            <li><a href="list.jsp">漫画类</a></li>
         </ul>
     </div>
 </div>
@@ -185,13 +190,13 @@
                     <!--图片-->
                     <div class="c4_b5_c_box_pic">
                         <div class="c4b5_pic_view">
-                            <a href="viewBook.html"><img src="images/list_p1.png"></a>
+                            <a href="viewBook.jsp"><img src="images/list_p1.png"></a>
                         </div>
                     </div>
                     <!--价钱-->
                     <div class="c4_b5_c_box_txt">
                         <h1>￥ 50</h1>
-                        <h2><a href="viewBook.html">Java编程思想</a></h2>
+                        <h2><a href="viewBook.jsp">Java编程思想</a></h2>
                     </div>
                     <!--购买等操作-->
                     <div class="c4b5_el">
@@ -207,13 +212,13 @@
                     <!--图片-->
                     <div class="c4_b5_c_box_pic">
                         <div class="c4b5_pic_view">
-                            <a href="viewBook.html"><img src="images/list_p1.png"></a>
+                            <a href="viewBook.jsp"><img src="images/list_p1.png"></a>
                         </div>
                     </div>
                     <!--价钱-->
                     <div class="c4_b5_c_box_txt">
                         <h1>￥ 50</h1>
-                        <h2><a href="viewBook.html">Java编程思想</a></h2>
+                        <h2><a href="viewBook.jsp">Java编程思想</a></h2>
                     </div>
                     <!--购买等操作-->
                     <div class="c4b5_el">
@@ -235,7 +240,7 @@
                     <!--价钱-->
                     <div class="c4_b5_c_box_txt">
                         <h1>￥ 50</h1>
-                        <h2><a href="viewBook.html">Java编程思想</a></h2>
+                        <h2><a href="viewBook.jsp">Java编程思想</a></h2>
                     </div>
                     <!--购买等操作-->
                     <div class="c4b5_el">
@@ -251,13 +256,13 @@
                     <!--图片-->
                     <div class="c4_b5_c_box_pic">
                         <div class="c4b5_pic_view">
-                            <a href="viewBook.html"><img src="images/list_p1.png"></a>
+                            <a href="viewBook.jsp"><img src="images/list_p1.png"></a>
                         </div>
                     </div>
                     <!--价钱-->
                     <div class="c4_b5_c_box_txt">
                         <h1>￥ 50</h1>
-                        <h2><a href="viewBook.html">Java编程思想</a></h2>
+                        <h2><a href="viewBook.jsp">Java编程思想</a></h2>
                     </div>
                     <!--购买等操作-->
                     <div class="c4b5_el">
@@ -273,13 +278,13 @@
                     <!--图片-->
                     <div class="c4_b5_c_box_pic">
                         <div class="c4b5_pic_view">
-                            <a href="viewBook.html"><img src="images/list_p1.png"></a>
+                            <a href="viewBook.jsp"><img src="images/list_p1.png"></a>
                         </div>
                     </div>
                     <!--价钱-->
                     <div class="c4_b5_c_box_txt">
                         <h1>￥ 50</h1>
-                        <h2><a href="viewBook.html">Java编程思想</a></h2>
+                        <h2><a href="viewBook.jsp">Java编程思想</a></h2>
                     </div>
                     <!--购买等操作-->
                     <div class="c4b5_el">

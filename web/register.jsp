@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%
+    String path = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,7 +15,7 @@
 <div class="container2">
     <div class="header2">
         <div>
-            <a href="index.html"><img class="logo" src="images/logon_register.png"></a>
+            <a href="index.jsp"><img class="logo" src="images/logon_register.png"></a>
         </div>
         <div>
             <ul class="tabs">
@@ -18,7 +23,7 @@
             </ul>
         </div>
         <div class="tlg">
-            已有账号 <a href="login.html">登陆</a>
+            已有账号 <a href="login.jsp">登陆</a>
         </div>
     </div>
     <div class="content2">
