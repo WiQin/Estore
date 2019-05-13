@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%
+    String path = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,7 +21,7 @@
     <div class="c1_box1"><!--背景图片-->
         <div class="login_box"><!--登陆框-->
             <div class="center1">
-                <form action="indexSuccess.html" method="post">
+                <form action="LoginServlet" method="post">
                     <h1>账号登陆</h1>
                     <h2>公共场所请不要泄露您的密码，以防止账号丢失
                     </h2>
@@ -31,8 +36,8 @@
                         <input type="password" name="password"/>
                     </div>
                     <div class="fg_box">
-                        <a class="fg" href="forgetPassword.html">忘记登陆密码？</a>
-                        <a class="treg" href="register.html">立即注册</a>
+                        <a class="fg" href="forgetPassword.jsp">忘记登陆密码？</a>
+                        <a class="treg" href="register.jsp">立即注册</a>
                     </div>
                     <div class="sub_box">
                         <input type="submit" value="登陆"/>

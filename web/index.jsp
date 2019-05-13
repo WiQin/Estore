@@ -14,12 +14,11 @@
   <link rel="stylesheet" href="css/table.css" />
 </head>
 <body>
-这个东西很好
 <!--顶部-->
 <div class="top">
   <div class="top_center">
     <ul class="top_lr">
-      <li><a href="login.html" style="color: red;">亲,请登入</a></li>
+      <li><a href="login.jsp" style="color: red;">亲,请登入</a></li>
       <li><a href="register.jsp">免费注册</a></li>
     </ul>
     <ul class="top_bars">

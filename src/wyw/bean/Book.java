@@ -1,7 +1,7 @@
 package wyw.bean;
 
 /**
- * @ClassName Book
+ * @ClassName BookDao
  * @Description
  * @Author Wangyw
  */
@@ -56,7 +56,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book{" +
+        return "BookDao{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +

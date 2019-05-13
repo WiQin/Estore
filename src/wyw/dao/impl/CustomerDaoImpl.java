@@ -2,6 +2,7 @@ package wyw.dao.impl;
 
 import wyw.bean.Customer;
 import wyw.dao.CustomerDao;
+import wyw.util.exception.CustomerException;
 import wyw.util.jdbc.JdbcUtil;
 
 import java.sql.ResultSet;
@@ -19,7 +20,7 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
-    public void insertCustomer(Customer customer) {
+    public void insertCustomer(Customer customer)  throws CustomerException{
 
         String sql = "insert into customer(name,password,zip,address,telephone,email) values(?,?,?,?,?,?)";
         String[] params = {customer.getName(),customer.getPassword(),customer.getZip(),customer.getAddress(),customer.getTelephone(),customer.getEmail()};
@@ -28,7 +29,7 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
-    public Customer selectCustomerByName(String name) {
+    public Customer selectCustomerByName(String name)  throws CustomerException{
         Customer customer = null;
         String sql = "select * from customer where name=?";
         String[] params = {name};
@@ -54,7 +55,7 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
-    public void updateCustomer(Customer customer) {
+    public void updateCustomer(Customer customer) throws CustomerException {
         String sql = "update customer set password=?,zip=?,address=?,telephone=?,email=? where name=?";
         //sql语句中的参数
         String[] params = {customer.getPassword(),customer.getZip(),customer.getAddress(),customer.getTelephone(),customer.getEmail(),customer.getName()};
