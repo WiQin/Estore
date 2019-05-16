@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface BookService {
     public List<Book> findAllBooks() throws BookException;
+    public Book findBookById(long id) throws BookException;
 }

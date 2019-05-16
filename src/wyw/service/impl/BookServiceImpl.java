@@ -23,4 +23,11 @@ public class BookServiceImpl implements BookService {
         List<Book> books = bookDao.selectAllBooks();
         return books;
     }
+
+    @Override
+    public Book findBookById(long id) throws BookException {
+        bookDao = new BookDaoImpl(JdbcUtil.getInstance());
+        Book book = bookDao.selectBookById(id);
+        return book;
+    }
 }

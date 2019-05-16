@@ -69,6 +69,14 @@ public class OrderForm {
         this.shipAddress = shipAddress;
     }
 
+    public Collection<OrderLine> getLines() {
+        return lines;
+    }
+
+    public void setLines(Collection<OrderLine> lines) {
+        this.lines = lines;
+    }
+
     @Override
     public String toString() {
         return "OrderForm{" +

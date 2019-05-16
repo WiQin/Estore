@@ -23,7 +23,7 @@ public class BookDaoImpl implements BookDao {
     }
 
     public Book resultBook(ResultSet rs) throws SQLException {
-        Book book;
+        Book book = null;
         int id = rs.getInt("id");
         String name = rs.getString("name");
         float price = rs.getFloat("price");
@@ -47,5 +47,23 @@ public class BookDaoImpl implements BookDao {
             e.printStackTrace();
         }
         return list;
+    }
+
+    @Override
+    public Book selectBookById(long id) {
+        String sql = "select * from book where id = ?";
+        String[] params = {id+""};
+        ResultSet rs = util.executeSelect(sql, params);
+        Book book = null;
+
+        try {
+            while (rs.next()) {
+                book = this.resultBook(rs);
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return book;
+
     }
 }

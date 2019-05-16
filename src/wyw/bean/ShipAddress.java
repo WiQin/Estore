@@ -15,6 +15,20 @@ public class ShipAddress {
     public ShipAddress() {
     }
 
+    public ShipAddress(long id, String shipuname, String adres, String phone) {
+        this.id = id;
+        this.shipuname = shipuname;
+        this.adres = adres;
+        this.phone = phone;
+    }
+
+    public ShipAddress(String shipuname, String adres, String phone, Customer customer) {
+        this.shipuname = shipuname;
+        this.adres = adres;
+        this.phone = phone;
+        this.customer = customer;
+    }
+
     public ShipAddress(long id, String shipuname, String adres, String phone, Customer customer) {
         this.id = id;
         this.shipuname = shipuname;

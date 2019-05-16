@@ -1,0 +1,364 @@
+Estore:
+	网上书城
+用户：注册，登录
+书籍：查看，购买书籍
+订单：生成订单，查看订单，删除订单，查看订单明细
+
+三层架构，B/S
+技术：jsp+servlet+java+mybatis+oracle
+
+1）分类表:es_category
+id,name,desc,parent_id(父分类的ID)
+查找所有一级分类:
+select * from es_catogery where parent_id is null;
+二级分类:
+select * from es_category where parent_id is not null;
+查找所有一级分类，with所有的二级分类
+..........
+
+2）图书:es_book:
+.............,category_id(二级分类ID)
+查找二级分类ID为10的所有图书
+select * from es_book where category_id = 10
+查找一级分类ID为1下的所有图书
+select * from es_book where category_id in(
+	select category_id from es_category where parent_id = 1
+)
+按照ID查找图书
+
+3）顾客表：es_customer
+....顾客注册填写的所有相关信息
+增 查
+添加:
+insert into es_customer() values()
+null
+查：
+select * from es_customer where id = ?
+
+4)收货地址表:es_shipaddress
+...基本信息,customer_id
+查找ID为1的顾客所有的收货地址
+select * from es_shipaddress where customer_id = 1;
+添加新的收货地址:
+insert into es_shipaddress() values...
+
+
+5）es_orderform
+.....shipaddress_id,customer_id
+
+
+
+6）es_orderLine
+num,book_id,orderform_id
+
+servlet--jsp--mybatis
+
+select * from es_catogery where parent_id is null;7条记录
+resultMap
+
+<assocation property="parent" column="parent_id" select="根据parent_id查找分类">
+<collection property="subCategroys" column="category_id" select="根据一级分类ID查找二级分类">
+
+
+service:
+处理业务逻辑(30,15,10--11)，事务管理
+
+页面样式的路径问题
+
+1.进入首页
+index.html
+toIndex.do---servlet
+1.1查找所有的一级分类，要求一级分类对象包含其子分类(7条(3条))
+list<Category>  categorys
+categorys:7条，每一个Category--subCategorys(3)
+
+1.2查找新出版的三本书(3本)
+	排序，伪列截取
+1.3查找所有的图书(21本)
+
+
+{
+	web:
+	doGet(){
+	List<Category > .. = new BookService().findAllCategory();
+
+	categorys
+	newBooks
+	allBooks
+	发送显示到页面(jsp,遍历 <c:foreach>
+	<c:foreach ${categorys} catOne>
+		<a
+		dd
+<a href="toBookCategroy.do?mark=1&categroyId=${.catrgoryId}">
+		${catOne.name}</a>
+		h1
+		p  <c:foreach ${catOne.subCategorys} catTwo>
+		<a href="toBookCategroy.do?mark=2&categroyId=${.catrgoryId}"></a>
+			${catTwo.name }
+			</c:foreach>
+	</c:foreach>
+	)
+	}
+
+}
+
+2.1注册，登录
+regitser.html--jsp
+regiser.servlet{
+	获取参数，封装对象，
+	调用方法
+		service.register(User){
+			user.getName
+			User user = dao.findCustomerByName()
+			user != null{
+			throw new CustomerServiceException("用户名重复")
+			}
+		}
+	----成功登录,login.jsp
+	----失败--regitser.jsp
+}
+
+
+login.html--jsp
+loginServlet:
+try{
+	service.login(username,password)
+	--index.jsp
+}catch(){
+	--login.jsp
+}
+service.login(){
+	Customer c = dao.findCustomerByName
+	if(c==null){
+		throw new CustomerServiceException("用户不存在")
+	}
+	if(!pwd.equals(c.getpwd())){
+		throw new CustomerServiceException("密码错误")
+	}
+}
+
+2.2查看分类下的图书列表，查看某本图书的信息
+
+toBookCategory.do?mark=1/2&categoryId=1/11
+toBookCategoryServlet:
+	获取参数mark,categoryId
+	service.findBookByCategoryId(mark,id){
+
+		dao.findBooksByCategoryOne()
+		dao.findBooksByCategoryTwo()
+
+	}
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------
+1.不清楚从哪步下手
+2.写到中途，思路中断，代码实现有问题
+
+(1).搭架子
+web项目--
+   common--bean,util,exception
+   dao--mybatis:*.xml.*.java(映射文件，映射接口)
+   service--IXXXService,impl--XXXServiceImpl
+   web--filter,listener,servlet
+
+   webContent---
+   	  css/images/js..
+   	  *.jsp
+   	  customer/*.jsp
+   	  WEB-INF
+   	  配置文件...填充
+(2).分析
+	2.1进入首页
+	前端页面---web层--servlet----service--dao--DB
+
+
+	2.2注册
+	前端页面---web层--servlet----service--dao--DB
+	register.jsp--form(register.do)---registerServlet
+
+	2.3登录
+	前端页面---web层--servlet----service--dao--DB
+
+
+3.
+	1.toCategoryBookList.do?mark=1&categoryId=${categoryOne.categoryId:
+	CategoryBookListServlet按照书籍分类跳转到分类下的书籍列表页面(list.html--list.jsp)
+	注意：一级分类还是二级分类
+	2.viewBook.do?bookId=${book.bookId }
+	ViewBookServlet:根据书籍ID查找对应的书，要求查出其分类以及其父分类--viewBook.jsp
+
+
+4.提交购物车，修改购物车，提交订单（收货地址），查看订单，删除订单
+
+购物车:session
+
+
+1.建立项目，搭起来
+2.一部分功能:			获取封装调用 处理   增删改
+html--jsp(操作)-servlet(web获取封装)-service-dao-数据库
+jsp(展示)--servlet(web)--service	 --   dao- -|
+展示	返回(页面，数据)	     返回，事务 	  返回
+进入首页，登录，注册
+session
+cookie
+
+数据库表
+
+需求
+
+4.点击分类，进入分类下的所有图书列表页面list.html
+estoreIndex.jsp
+	|
+toCategoryBookList.do?mark=   &  categoryId =
+思路:CategoryBookListServlet-url:/toCategoryBookList.do
+{
+	mark,categoryId
+	service对象:bookService
+	bookService.findBookByCategoryId(mark,categoryId){
+		bookMapper.findBooksByCategoryOne
+		bookMapper.findBooksByCategoryTwo
+	}
+}
+
+list.html---list.jsp(展示被点击的分类下的图书列表)
+
+5.点击书籍，跳转到书籍介绍页面viewBook.html
+estoreIndex.jsp/list.jsp
+viewBook.do?bookId =
+思路:
+viewBookServlet :url:/viewBook.do{
+	bookId--parameter
+	bookService.findBookById(bookId){
+		return bookMapper.findBookById(bookId)
+	}
+}
+范围对象，跳转页面，传递数据
+viewBook.jsp(展示被点击的书籍的详细信息)
+
+6.添加购物车 shopCar.html
+购物车:    文学类书1   10
+	属性:   map<bookId,OrderLine>
+			map<book,num>
+			map<bookId,map<book,num>>
+    功能:   添加add
+    		修改update
+    		清空clear
+    		获取所有的订单项 getOrderLines
+    		获取总金额:  getTotal
+    		获取商品总量: getSum
+
+viewBook.jsp/list.jsp
+customer/addShopCar.do?bookId=  & num=
+
+AddShopCarServlet{
+	shopCar = session.getAttribute("shopCar");
+	book = BookService.findBookById(bookId){
+		return bookMapper.findBookById(bookId)
+	}
+	shopCar.add(book,num);
+}
+
+customer/shopCar.jsp(展示购物车中的商品信息,一个个的订单项class(book,num))
+
+7.shopCar.jsp,去提交页面准备提交
+ 7.1:修改某件商品的数量
+ 	customer/updateShopCar.do?bookId= & num=
+ 	UpdateShopCarServlet{
+ 		shopCar = session.getAttribute("shopCar");
+ 		shopCar.update(bookId,num);
+ 	}
+ 	customer/shopCar.jsp
+ 7.2:去提交,跳转到提交页面confirm.html
+ 	ToConfirmServlet-- customer/toConfirm.do{
+ 	查找当前用户的所有收货地址
+ 	shipadds = customerService.findShipAddress(customerId){
+ 		return customerMapper.findShipAddress();
+
+ 	}
+ 	范围对象:shipadds
+ 	}
+ 	customer/confirm.jsp(展示当前用户的所有收货地址，以及购物车中的商品信息)
+
+8.提交订单(提交当前购物车中的商品，跳转到订单列表页面)
+  8.1提交当前购物车中的商品,保存收货地址，保存订单，保存订单项，清空购物车
+	customer/confirm.jsp
+	orderForm = new OrderForm()
+	获取收货地址对象orderForm.setShipAddress()
+		1.选择了用户已有收货地址
+		shipAddId
+		shipAddress = customerService.findShipAddressById(){
+
+		}
+		2.
+		receiveName,phone,address
+		新添加收货地址
+		创建收货地址new
+		保存收货地址
+
+
+	获取用户对象 session.getAttritebu(customer);
+	获取所有的订单项 shopCar.getOrderLines()
+	获取下单时间 new Date()
+	获取总金额 shopCar.getToal()
+
+	customerService.saveOrder(of){
+		customerMapper.saveOrderForm()
+		for(OrderLine line : of.getOrderLines){
+			line.setOrderFrom(of);
+			customerMapper.saveOrderLine(line);
+		}
+	}
+	shopCar.clear();
+	跳转
+	8.2跳转到订单列表页面，展示当前用户的所有订单
+	toOrderList.do{
+		customer = session.getAttribute("customer")
+		List<OrderForm> orders =  customerService.findAllOrderForm(cid){
+			customerMapper.findAllOrderForm(cid)
+		}
+	}
+
+	customer/orderList.jsp(展示当前用户的所有订单列表orders)
+
+9.删除订单，查看订单明细
+ customer/orderList.jsp
+   9.1:删除订单
+   deleteOrder.do?orderFormId=
+   DeleteOrderServlet{
+   	orderFormId
+   	CutomerService.deleteOrderForm(orderFormId){
+   		customerMapper.deleteOrderForm(orderFormId)
+   	}
+   }
+   toOrderList.do
+   9.2:查看订单明细
+   Orderdetail.do?orderFormId=
+   OrderdetailServlet{
+
+	OrderForm = CutomerService.findOrderFormById(orderFormId){
+   		customerMapper.findOrderFormById(orderFormId)
+   	}
+
+   }
+
+   customer/orderdetail.jsp(展示一个订单对象中的所有订单详情,OrderForm,orderLines)
+
+
+
+
+
+
+
+
+
+
+
+

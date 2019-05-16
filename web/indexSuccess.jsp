@@ -157,7 +157,7 @@
                 <ul>
                     <c:forEach items="${sessionScope.books }" var="books">
                         <li><img src="images/p01.png" />
-                            <a href="showBookViewServlet?id=${books.id }">${books.name}</a>
+                            <a href="ViewBookServlet?id=${books.id }">${books.name}</a>
                         </li>
                     </c:forEach>
                 </ul>
@@ -199,7 +199,7 @@
                         <p>Java经典</p>
                         <h2>畅销书籍</h2>
                         <p>
-                            <a href="showBookViewServlet?id=${books.id }">更多精彩，点击进入</a>
+                            <a href="ViewBookServlet?id=${books.id }">更多精彩，点击进入</a>
                         </p>
                     </div>
                 </li>

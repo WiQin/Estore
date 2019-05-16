@@ -1,6 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%
+    String path = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+    <base href="<%=path %>">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>briup安全中心</title>
     <link rel="stylesheet" href="css/common.css"/>
@@ -9,12 +15,19 @@
     <link rel="stylesheet" href="css/table.css" />
     <link rel="stylesheet" href="css/newmain.css" />
 </head>
+
+<script type="text/javascript">
+    function update(){
+        alert("修改成功!");
+    }
+</script>
+
 <body>
 <!--顶部-->
 <div class="top">
     <div class="top_center">
         <ul class="top_bars">
-            <li><a href="index.html">退出</a>|</li>
+            <li><a href="index.jsp">退出</a>|</li>
             <li><a href="#">我的订单<span class="jt_down"></span></a>|</li>
             <li><a href="#">关注杰普<span class="jt_down"></span></a>|</li>
             <li><a href="#">网站导航<span class="jt_down"></span></a></li>
@@ -30,11 +43,11 @@
             <span>搜索</span>
         </div>
         <p>
-            <a href="list.html">文学类</a>|
-            <a href="list.html">教育类</a>|
-            <a href="list.html">计算机</a>|
-            <a href="list.html">儿童类</a>|
-            <a href="list.html">漫画类</a>|
+            <a href="list.jsp">文学类</a>|
+            <a href="list.jsp">教育类</a>|
+            <a href="list.jsp">计算机</a>|
+            <a href="list.jsp">儿童类</a>|
+            <a href="list.jsp">漫画类</a>|
         </p>
     </div>
     <div class="h3_right">
@@ -52,14 +65,14 @@
 <div class="nav_top">
     <div class="nav_top_center">
         <div>
-            全部图书分类
+            <a class="font20" href="indexSuccess.jsp">返回</a>>全部图书分类
         </div>
         <ul>
-            <li><a href="list.html">文学类</a></li>
-            <li><a href="list.html">教育类</a></li>
-            <li><a href="list.html">计算机</a></li>
-            <li><a href="list.html">儿童类</a></li>
-            <li><a href="list.html">漫画类</a></li>
+            <li><a href="list.jsp">文学类</a></li>
+            <li><a href="list.jsp">教育类</a></li>
+            <li><a href="list.jsp">计算机</a></li>
+            <li><a href="list.jsp">儿童类</a></li>
+            <li><a href="list.jsp">漫画类</a></li>
         </ul>
     </div>
 </div>
@@ -69,58 +82,57 @@
             <h3>个人信息</h3>
         </div>
         <div class="security">
-            <form action="">
+            <form action="UpdateUserInfoServlet" method="post">
                 <ul class="list">
                     <li>
-                        <input id="J_euserName" class="long" readonly="readonly" name="txtUser" value="tom" type="text" />
+                        <input id="J_euserName" class="long" readonly="readonly" name="name" value="${sessionScope.customer.name }" type="text" />
                         <div class="name">用户名:</div>
                         <span id="J_eUserNameTipImg" class="icon"></span>
                         <div id="J_eUserNameTipInfo" class="ltip"></div>
                         <span class="placeholder" style="position: absolute;z-index: 20;color: rgb(153,153,153);top: 14px;left: 345px;line-height: 37px;"></span>
                     </li>
                     <li>
-                        <input id="J_euserName" class="long" name="txtUser" value="" type="text" />
+                        <input id="J_euserName" class="long" name="password" value="${sessionScope.customer.password }" type="text" />
                         <div class="name">密码:</div>
                         <span id="J_eUserNameTipImg" class="icon"></span>
                         <div id="J_eUserNameTipInfo" class="ltip"></div>
                         <span class="placeholder" style="position: absolute;z-index: 20;color: rgb(153,153,153);top: 14px;left: 345px;line-height: 37px;"></span>
                     </li>
                     <li>
-                        <input id="J_euserName" class="long" name="txtUser" value="" type="text" />
+                        <input id="J_euserName" class="long" name="zip" value="${sessionScope.customer.zip }" type="text" />
                         <div class="name">邮编:</div>
                         <span id="J_eUserNameTipImg" class="icon"></span>
                         <div id="J_eUserNameTipInfo" class="ltip"></div>
                         <span class="placeholder" style="position: absolute;z-index: 20;color: rgb(153,153,153);top: 14px;left: 345px;line-height: 37px;"></span>
                     </li>
                     <li>
-                        <input id="J_euserName" class="long" name="txtUser" value="" type="text" />
+                        <input id="J_euserName" class="long" name="address" value="${sessionScope.customer.address }" type="text" />
                         <div class="name">地址:</div>
                         <span id="J_eUserNameTipImg" class="icon"></span>
                         <div id="J_eUserNameTipInfo" class="ltip"></div>
                         <span class="placeholder" style="position: absolute;z-index: 20;color: rgb(153,153,153);top: 14px;left: 345px;line-height: 37px;"></span>
                     </li>
                     <li>
-                        <input id="J_euserName" class="long" name="txtUser" value="" type="text" />
+                        <input id="J_euserName" class="long" name="telephone" value="${sessionScope.customer.telephone }" type="text" />
                         <div class="name">电话:</div>
                         <span id="J_eUserNameTipImg" class="icon"></span>
                         <div id="J_eUserNameTipInfo" class="ltip"></div>
                         <span class="placeholder" style="position: absolute;z-index: 20;color: rgb(153,153,153);top: 14px;left: 345px;line-height: 37px;"></span>
                     </li>
                     <li>
-                        <input id="J_euserName" class="long" name="txtUser" value="" type="text" />
+                        <input id="J_euserName" class="long" name="email" value="${sessionScope.customer.email }" type="text" />
                         <div class="name">电子邮箱:</div>
                         <span id="J_eUserNameTipImg" class="icon"></span>
                         <div id="J_eUserNameTipInfo" class="ltip"></div>
                         <span class="placeholder" style="position: absolute;z-index: 20;color: rgb(153,153,153);top: 14px;left: 345px;line-height: 37px;"></span>
                     </li>
                     <li>
-                        <input id="J_euserName" class="long" style="width:70px;font-size: large;cursor: pointer;text-align: center;line-height: 40px;"  value="修改" type="submit" />
+                        <a href="javascript:void(0)" onclick="update()"><input id="J_euserName" class="long" style="width:70px;font-size: large;cursor: pointer;text-align: center;line-height: 40px;"  value="修改" type="submit" /></a>
                         <div class="name">&nbsp;</div>
                         <span id="J_eUserNameTipImg" class="icon"></span>
                         <div id="J_eUserNameTipInfo" class="ltip"></div>
                         <span class="placeholder" style="position: absolute;z-index: 20;color: rgb(153,153,153);top: 14px;left: 345px;line-height: 37px;"></span>
                     </li>
-
                 </ul>
             </form>
         </div>

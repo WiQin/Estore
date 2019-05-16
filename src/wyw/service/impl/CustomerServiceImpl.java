@@ -21,7 +21,7 @@ public class CustomerServiceImpl implements CustomerService {
         dao = new CustomerDaoImpl(JdbcUtil.getInstance());
         Customer cus = dao.selectCustomerByName(customer.getName());
         if(cus != null){
-
+            throw new CustomerException("该用户已存在");
         }else{
             dao.insertCustomer(customer);
         }
@@ -35,12 +35,11 @@ public class CustomerServiceImpl implements CustomerService {
             if(cus.getPassword().equals(password)){
                 return cus;
             }else{
-
+                throw new CustomerException("密码错误！！");
             }
         }else{
-
+            throw new CustomerException("用户不存在");
         }
-        return null;
     }
 
     @Override
